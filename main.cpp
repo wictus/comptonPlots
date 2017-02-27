@@ -1,13 +1,14 @@
 #include <iostream>
-#include "comptonSpectrum.h"
+#include "spectrum.h"
 #include "energySpectrum.h"
+#include "crystalEnergySpectrum.h"
 #include "TH1F.h"
 #include "TCanvas.h"
 #include <sstream>
 
-int main(int argc, char **argv) {
-    
-  energySpectrum petSpectrumPure(511, 0);
+void energySmearExampe()
+{
+   energySpectrum petSpectrumPure(511, 0);
   petSpectrumPure.setNumberOfEvents(1E7);
   petSpectrumPure.generateEvents();
   TH1F* pure511 = petSpectrumPure.plotHisto();   
@@ -33,5 +34,19 @@ int main(int argc, char **argv) {
   }
   
   
+ 
+}
+
+int main(int argc, char **argv) {
+    crystalEnergySpectrum kiko(511, 1.4);
+    kiko.setNumberOfEvents(1E7);
+    kiko.generateEvents();
+    TH1F* histoik = kiko.plotHisto();
+    TCanvas* c = new TCanvas();
+    histoik->Draw();
+    
+    c->SaveAs( "crystals.root");
     return 0;
 }
+
+

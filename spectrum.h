@@ -3,10 +3,10 @@
 
 #include "TH1F.h"
 
-class comptonSpectrum
+class spectrum
 {
 public:
-  comptonSpectrum(double initialEnergy, double resolution);
+  spectrum(double initialEnergy, double resolution);
   void setNumberOfEvents(const int events);
   virtual TH1F* plotHisto();
   virtual void generateEvents();
