@@ -1,6 +1,7 @@
 #include <iostream>
-#include "comptonSpectrum.h"
+#include "spectrum.h"
 #include "energySpectrum.h"
+#include "crystalEnergySpectrum.h"
 #include "TH1F.h"
 #include "TCanvas.h"
 #include "TLegend.h"
@@ -75,5 +76,18 @@ int main(int argc, char **argv) {
 //   smearingComparison();
   initalEnergyComparison();
   
-    return 0;
+ 
 }
+
+void crystal() {
+    crystalEnergySpectrum kiko(511, 1.4);
+    kiko.setNumberOfEvents(1E7);
+    kiko.generateEvents();
+    TH1F* histoik = kiko.plotHisto();
+    TCanvas* c = new TCanvas();
+    histoik->Draw();
+    
+    c->SaveAs( "crystals.root");
+}
+
+

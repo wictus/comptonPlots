@@ -1,7 +1,7 @@
 #include "energySpectrum.h"
 
 energySpectrum::energySpectrum(double initialEnergy, double resolution):
-comptonSpectrum(initialEnergy, resolution)
+spectrum(initialEnergy, resolution)
 {
 
 }
