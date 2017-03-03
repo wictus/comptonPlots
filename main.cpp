@@ -5,6 +5,7 @@
 #include "TH1F.h"
 #include "TCanvas.h"
 #include "TLegend.h"
+#include "TF1.h"
 #include <sstream>
 #include <vector>
 
@@ -71,14 +72,6 @@ void initalEnergyComparison()
   c->SaveAs("energies.root");
 }
 
-
-int main(int argc, char **argv) {
-//   smearingComparison();
-  initalEnergyComparison();
-  
- 
-}
-
 void crystal() {
     crystalEnergySpectrum kiko(511, 1.4);
     kiko.setNumberOfEvents(1E7);
@@ -89,5 +82,25 @@ void crystal() {
     
     c->SaveAs( "crystals.root");
 }
+
+void energyDepositiedVsScatterAngle()
+{
+  TCanvas* c = new TCanvas();
+  TF1 ePrim ("ePrim", "[0]/(1+[0]/511.0*(1-cos(x*[1])))", 0, M_PI);
+  ePrim.SetParameter(0,511.0);
+  ePrim.SetParameter(1, M_PI/180);
+  TF1* eDepAngle = new TF1("eDepAngle", "ePrim* ePrim * 2 / 511.0 / (1.0 + 2.0*ePrim/511.0)", 0, 180);
+  eDepAngle->SetParameter(0,511.0);
+  eDepAngle->Draw();
+  c->SaveAs("depo.root");
+}
+
+int main(int argc, char **argv) {
+//  smearingComparison();
+//  initalEnergyComparison();
+  energyDepositiedVsScatterAngle();
+ 
+}
+
 
 
