@@ -1,13 +1,13 @@
 #include "crystalEnergySpectrum.h"
 
-crystalEnergySpectrum::crystalEnergySpectrum(double initialEnergy, double resolution): comptonSpectrum(initialEnergy, resolution)
+crystalEnergySpectrum::crystalEnergySpectrum(double initialEnergy, double resolution):spectrum(initialEnergy,resolution)
 {
 
 }
 
 void crystalEnergySpectrum::generateEvents()
 {
-comptonSpectrum::generateEvents();
+
 
 int generatedEvents = 0;
 TRandom3 generator(0); // automatically computed seed via TUUID object

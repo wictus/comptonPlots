@@ -2,11 +2,11 @@
 #define CRYSTALENERGYSPECTRUM
 
 
-#include "comptonSpectrum.h"
+#include "spectrum.h"
 #include "TRandom3.h"
 #include "math.h"
 
-class crystalEnergySpectrum: public comptonSpectrum
+class crystalEnergySpectrum: public spectrum
 {
 public:
   crystalEnergySpectrum(double initialEnergy, double resolution);

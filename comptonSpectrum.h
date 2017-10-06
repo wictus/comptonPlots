@@ -18,7 +18,6 @@ public:
 protected:
   void fillSpectrum();
   TH1F fCompton;
-  std::vector<double> fSimEvents;
 };
 
 #endif //COMPTON_SPECTRUM

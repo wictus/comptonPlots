@@ -14,6 +14,7 @@ protected:
   double fInitialEnergy;
   double fResolution;
   int fEvents;
+  std::vector<double> fSimEvents;
 };
 
 #endif //COMPTONSPECTRUM
