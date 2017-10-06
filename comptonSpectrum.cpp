@@ -1,12 +1,14 @@
-#include "energySpectrum.h"
+#include "comptonSpectrum.h"
 
-energySpectrum::energySpectrum(double initialEnergy, double resolution):
+comptonSpectrum::comptonSpectrum(double initialEnergy, double resolution):
 spectrum(initialEnergy, resolution)
 {
-
+  fCompton = TH1F("comptonHisto","comptonHisto",511,0,511);
+  fCompton.GetXaxis()->SetTitle("Deposited energy");
+  fCompton.GetYaxis()->SetTitle("Counts");
 }
 
-void energySpectrum::generateEvents()
+void comptonSpectrum::generateEvents()
 {
   int generatedEvents = 0;
   double R = 2.82E-13; //cm
@@ -34,17 +36,21 @@ void energySpectrum::generateEvents()
   }
 
   std::cout << "Generated " << generatedEvents << " events " << std::endl;
+  if( fCompton.GetEntries() == 0 )
+  {
+    std::cout << "Empty compton histogram, filling it with generated entries\n";
+    fillSpectrum();
+  }
 }
 
-TH1F* energySpectrum::plotHisto()
+void comptonSpectrum::fillSpectrum()
 {
-  TH1F* histo = new TH1F("energyHisto","energyHisto",511,0,511);
-  
-  for( auto i : fSimEvents )
-    histo->Fill(i);
-  
-  histo->GetXaxis()->SetTitle("Deposited energy");
-  histo->GetYaxis()->SetTitle("Counts");
-  
-  return histo;
+  for(auto i: fSimEvents)
+    fCompton.Fill(i);
+}
+
+
+TH1F* comptonSpectrum::plotHisto()
+{
+  return &fCompton;
 }

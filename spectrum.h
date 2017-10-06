@@ -11,7 +11,6 @@ public:
   virtual TH1F* plotHisto();
   virtual void generateEvents();
 protected:
-  
   double fInitialEnergy;
   double fResolution;
   int fEvents;
