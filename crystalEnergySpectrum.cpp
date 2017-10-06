@@ -35,7 +35,10 @@ while(generatedEvents <fEvents)
 
 TH1F* crystalEnergySpectrum::plotHisto()
 {
-  TH1F* histo = new TH1F("crystalHisto","crystalHisto",650,0,651);
+  TString title = "crystalHisto";
+  title+= fInitialEnergy;
+  title+= "keV";
+  TH1F* histo = new TH1F(title,title,650,0,651);
   
   for( auto i : fSimEvents )
     photoPeak.Fill(i);
