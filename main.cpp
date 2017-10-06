@@ -40,7 +40,9 @@ void energySmearExample()
 int main(int argc, char **argv) {
     crystalEnergySpectrum kiko(511, 0);
     kiko.setNumberOfEvents(1E7);
+    kiko.setPhotoPeakProbability(0.01);
     kiko.generateEvents();
+    
     TH1F* histoik = kiko.plotHisto();
     TCanvas* c = new TCanvas();
     histoik->Draw();

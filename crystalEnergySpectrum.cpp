@@ -35,15 +35,25 @@ while(generatedEvents <fEvents)
 
 TH1F* crystalEnergySpectrum::plotHisto()
 {
-  TH1F* histo = new TH1F("energyHisto","energyHisto",650,0,651);
+  TH1F* histo = new TH1F("crystalHisto","crystalHisto",650,0,651);
   
   for( auto i : fSimEvents )
     photoPeak.Fill(i);
   
+  photoPeak.Scale(photoPeakProbability/comptonProbability);
   histo = compton.getHisto();
   histo->Add(&photoPeak);
   
   return histo;
 }
 
+void crystalEnergySpectrum::setComptonProbability(const double prob)
+{
+  comptonProbability = prob;
+}
+
+void crystalEnergySpectrum::setPhotoPeakProbability(const double prob)
+{
+  photoPeakProbability = prob;
+}
 
