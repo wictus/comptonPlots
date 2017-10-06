@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 
+
 void smearingComparison()
 {
   TCanvas* c = new TCanvas();;
@@ -73,15 +74,14 @@ void initalEnergyComparison()
   c->SaveAs("energies.root");
 }
 
-void crystal() {
-    crystalEnergySpectrum kiko(511, 1.4);
+crystalEnergySpectrum produceCrystal(double energy, double photoRatio) {
+    crystalEnergySpectrum kiko (energy, 1.4);
     kiko.setNumberOfEvents(1E7);
+    kiko.setComptonProbability((6.875E-03)/100.0);
+    kiko.setPhotoPeakProbability(3.996E-02/100.0);
     kiko.generateEvents();
-    TH1F* histoik = kiko.plotHisto();
-    TCanvas* c = new TCanvas();
-    histoik->Draw();
     
-    c->SaveAs( "crystals.root");
+    return kiko;
 }
 
 void energyDepositiedVsScatterAngle()
@@ -100,7 +100,15 @@ int main(int argc, char **argv) {
 //  smearingComparison();
 //  initalEnergyComparison();
 //   energyDepositiedVsScatterAngle();
+  crystalEnergySpectrum clean = produceCrystal(511,1);
+//   crystalEnergySpectrum scattered = produceCrystal(450);
+//  crystalEnergySpectrum scatteredHeavily = produceCrystal(340);
  
+ TCanvas* c = new TCanvas();
+ clean.plotHisto()->Draw();
+//  scattered.plotHisto()->Draw("same");
+//  scatteredHeavily.plotHisto()->Draw("same");
+    c->SaveAs( "crystals.root");
 }
 
 
