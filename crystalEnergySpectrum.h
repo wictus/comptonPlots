@@ -3,6 +3,7 @@
 
 
 #include "spectrum.h"
+#include "comptonSpectrum.h"
 #include "TRandom3.h"
 #include "math.h"
 
@@ -13,7 +14,7 @@ public:
   void generateEvents();
   TH1F* plotHisto();
 protected:
-  TH1F compton;
+  comptonSpectrum compton;
   TH1F photoPeak;
 };
 

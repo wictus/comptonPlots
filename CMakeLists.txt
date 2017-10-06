@@ -18,7 +18,7 @@ add_library(comptonSpectrum SHARED comptonSpectrum.cpp)
 target_link_libraries(comptonSpectrum  ${ROOT_LIBRARIES} spectrum)
 
 add_library(crystalEnergySpectrum SHARED crystalEnergySpectrum.cpp)
-target_link_libraries(crystalEnergySpectrum  ${ROOT_LIBRARIES} spectrum)
+target_link_libraries(crystalEnergySpectrum  ${ROOT_LIBRARIES} spectrum comptonSpectrum)
 
 add_executable(comptonplots main.cpp)
 

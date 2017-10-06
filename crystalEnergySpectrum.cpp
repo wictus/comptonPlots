@@ -1,13 +1,25 @@
 #include "crystalEnergySpectrum.h"
 
-crystalEnergySpectrum::crystalEnergySpectrum(double initialEnergy, double resolution):spectrum(initialEnergy,resolution)
+crystalEnergySpectrum::crystalEnergySpectrum(double initialEnergy, double resolution):
+spectrum(initialEnergy,resolution),
+compton(initialEnergy,resolution),
+photoPeak("energyHisto","energyHisto",651,-0.5,650.5)
 {
-
+  photoPeak.GetXaxis()->SetTitle("Deposited energy [keV]");
+  photoPeak.GetYaxis()->SetTitle("Counts");
 }
 
 void crystalEnergySpectrum::generateEvents()
 {
 
+
+  if(fEvents == 0)
+  {
+     std::cout << "Set number of events to simulate\n";
+     std::exit(5);
+  }
+  compton.setNumberOfEvents(fEvents);
+  compton.generateEvents();
 
 int generatedEvents = 0;
 TRandom3 generator(0); // automatically computed seed via TUUID object
@@ -26,10 +38,10 @@ TH1F* crystalEnergySpectrum::plotHisto()
   TH1F* histo = new TH1F("energyHisto","energyHisto",650,0,651);
   
   for( auto i : fSimEvents )
-    histo->Fill(i);
+    photoPeak.Fill(i);
   
-  histo->GetXaxis()->SetTitle("Deposited energy");
-  histo->GetYaxis()->SetTitle("Counts");
+  histo = compton.getHisto();
+  histo->Add(&photoPeak);
   
   return histo;
 }
