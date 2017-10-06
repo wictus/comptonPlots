@@ -11,7 +11,7 @@ void energySmearExample()
    comptonSpectrum petSpectrumPure(511, 0);
   petSpectrumPure.setNumberOfEvents(1E7);
   petSpectrumPure.generateEvents();
-  TH1F* pure511 = petSpectrumPure.plotHisto();   
+  TH1F* pure511 = petSpectrumPure.getHisto();   
   TCanvas* c = new TCanvas();
   pure511->Draw();
   c->SaveAs("pure.png");
@@ -22,7 +22,7 @@ void energySmearExample()
     comptonSpectrum kiko(511, i);
     kiko.setNumberOfEvents(1E7);
     kiko.generateEvents();
-    TH1F* histoik = kiko.plotHisto();
+    TH1F* histoik = kiko.getHisto();
     histoik->Draw();
     std::stringstream lako;
     lako << i;

@@ -50,7 +50,7 @@ void comptonSpectrum::fillSpectrum()
 }
 
 
-TH1F* comptonSpectrum::plotHisto()
+TH1F* comptonSpectrum::getHisto()
 {
   return &fCompton;
 }

@@ -12,7 +12,7 @@ class comptonSpectrum: public spectrum
 {
 public:
   comptonSpectrum(double initialEnergy, double resolution);
-  TH1F* plotHisto();
+  TH1F* getHisto();
   void generateEvents();
   
 protected:

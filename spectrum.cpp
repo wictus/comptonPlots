@@ -17,7 +17,7 @@ void spectrum::generateEvents()
 
 }
 
-TH1F* spectrum::plotHisto()
+TH1F* spectrum::getHisto()
 {
   return nullptr;
 }
